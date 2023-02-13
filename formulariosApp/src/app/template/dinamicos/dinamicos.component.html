@@ -1,0 +1,63 @@
+<h1>Template: <small>Dinamicos</small></h1>
+<hr>
+<form action=""  #miFormulario="ngForm">
+    <div class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input type="text"
+                class="form-control"
+                ngModel
+                placeholder="Nombre"  
+                name="nombre" 
+                required 
+            >
+            <span *ngIf="miFormulario.controls['nombre'].errors" class="form-text text-danger">El precio debe ser 0 o mayor</span>
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text"
+                    class="form-control"
+                    required 
+                    name="nuevoJuego"
+                    [(ngModel)]="nuevoJuego"
+                >
+                <button class="btn btn-outline-primary" type="button"
+                    (click)="agregarJuego()"
+                >
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+            <div class="input-group" *ngFor="let item of persona.favoritos; let i = index">
+                <input type="text"
+                    class="form-control"
+                    required 
+                    name="favorito_{{i}}"
+                    [(ngModel)]="item.nombre"
+                >
+                <button class="btn btn-outline-danger" type="button" (click)="eliminar(item.id)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <button type="submit" 
+                class="btn btn-primary float-end">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<span>Persona</span>
+<pre>{{persona | json}}</pre>
